@@ -1,0 +1,60 @@
+{
+  "build_id": "20190305-150109",
+  "build_timestamp": "2019-03-05T15:01:09Z",
+  "name": "app1",
+  "parts": {
+    "app": {
+      "addr": 65536,
+      "cs_sha1": "4660ff873c4dda4f544de7890bfcb277be4b44e7",
+      "encrypt": true,
+      "ptn": "app_0",
+      "size": 1563568,
+      "src": "app1.bin",
+      "type": "app"
+    },
+    "boot": {
+      "addr": 4096,
+      "cs_sha1": "a3bd1ae87ab1896ff1fb039fbb5d0a63ae1530fc",
+      "encrypt": true,
+      "size": 22832,
+      "src": "bootloader.bin",
+      "type": "boot",
+      "update": false
+    },
+    "fs": {
+      "cs_sha1": "665834edc26d47d4a5e5676f439696c7cac95431",
+      "fs_size": 262144,
+      "ptn": "fs_0",
+      "size": 262144,
+      "src": "fs.img",
+      "type": "fs"
+    },
+    "nvs": {
+      "addr": 36864,
+      "encrypt": false,
+      "fill": 255,
+      "size": 16384,
+      "type": "nvs"
+    },
+    "otadata": {
+      "addr": 53248,
+      "cs_sha1": "471af83fac6e5bd49355879b3acbed10bab6f423",
+      "encrypt": true,
+      "size": 8192,
+      "src": "otadata.bin",
+      "type": "otadata"
+    },
+    "pt": {
+      "addr": 32768,
+      "cs_sha1": "1d31498bef0ca43611e2c095836ce6b8d777419c",
+      "encrypt": true,
+      "size": 3072,
+      "src": "partitions_mgos.bin",
+      "type": "pt"
+    }
+  },
+  "platform": "esp32",
+  "version": "1.0"
+}
+
+esptool -p COM7 -b 115200 -c esp32 write_flash 0x1000 bootloader.bin 0x8000 partitions_mgos.bin 0xd000 otadata.bin 0x10000 app1.bin 0x190000 fs.img
